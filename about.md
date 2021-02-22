@@ -6,7 +6,7 @@ permalink: /about/
 
 ## About Me
 Muhammad Ilham Hanifan <br/>
-Currently an undergraduate at Universitas Gunadarma, Informatics Major </br>
+Currently an undergraduate at Universitas Gunadarma, Informatics Major
 
 ---
 
