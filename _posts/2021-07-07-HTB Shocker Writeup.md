@@ -72,42 +72,33 @@ END_TIME: Wed Jul  7 04:23:20 2021
 DOWNLOADED: 4685 - FOUND: 3
 ```
 Ada folder cgi-bin yang mencurigakan. Lakukan lagi scan pada /cgi-bin 
-
-# NMAP:cgi/bin
+    
 ```
 ┌──(kali㉿kali)-[~/htb/shocker]
-└─$ cat 2nmap.txt    
-# Nmap 7.91 scan initiated Wed Jul  7 07:25:53 2021 as: nmap -A -v --script http-shellshock --script-args uri=/cgi-bin/user.sh,cmd=ls -oN 2nmap.txt 10.10.10.56
-Nmap scan report for 10.10.10.56
-Host is up (0.070s latency).
-Not shown: 998 closed ports
-PORT     STATE SERVICE VERSION
-80/tcp   open  http    Apache httpd 2.4.18 ((Ubuntu))
-| http-shellshock: 
-|   VULNERABLE:
-|   HTTP Shellshock vulnerability
-|     State: VULNERABLE (Exploitable)
-|     IDs:  CVE:CVE-2014-6271
-|       This web application might be affected by the vulnerability known
-|       as Shellshock. It seems the server is executing commands injected
-|       via malicious HTTP headers.
-|             
-|     Disclosure date: 2014-09-24
-|     References:
-|       http://seclists.org/oss-sec/2014/q3/685
-|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
-|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7169
-|_      http://www.openwall.com/lists/oss-security/2014/09/24/10
-2222/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-
-Read data files from: /usr/bin/../share/nmap
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-# Nmap done at Wed Jul  7 07:26:06 2021 -- 1 IP address (1 host up) scanned in 12.37 seconds
-                                                                                                      
+└─$    gobuster dir -u  10.10.10.56/cgi-bin/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt -x  sh,cgi,pl  
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.56/cgi-bin/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-lowercase-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Extensions:              sh,cgi,pl
+[+] Timeout:                 10s
+===============================================================
+2021/07/10 02:59:33 Starting gobuster in directory enumeration mode
+===============================================================
+/user.sh              (Status: 200) [Size: 118]
+Progress: 5232 / 830576 (0.63%)               ^C
+[!] Keyboard interrupt detected, terminating.
+                                               
+===============================================================
+2021/07/10 02:59:52 Finished
+===============================================================
 ```
-
-
 Ada file user.sh, jika dibuka di browser bisa didownload dan berikut adalah isinya
 ```
 Content-Type: text/plain
@@ -200,5 +191,5 @@ d967e5805006ca1e927d9d0188e02215
 ## Root flag:
 10.10.10.56> cat /root/root.txt
 7724872cf757e82700af2ed2d08b257a  
-
+ 
 ---
